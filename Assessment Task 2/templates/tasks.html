@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tasks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+
+    <div class="dashboard">
+        <header class="topbar">
+            <div>
+                <h1>My Task Manager</h1>
+                <p>Welcome, {{ session.get('username') }}!</p>
+            </div>
+
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </header>
+
+        <section class="task-card">
+            <h2>Add a New Task</h2>
+
+            <form id="taskForm">
+                <input
+                    type="text"
+                    id="taskTitle"
+                    placeholder="What do you need to do?"
+                    maxlength="200"
+                    required
+                >
+                <button type="submit" id="addButton">Add Task</button>
+            </form>
+
+            <p id="message" aria-live="polite"></p>
+        </section>
+
+        <section class="task-card">
+            <h2>My Tasks</h2>
+
+            <div class="task-heading">
+                <span>Task</span>
+                <span>Status</span>
+            </div>
+
+            <ul id="taskList">
+                {% for task in tasks %}
+                    <li class="task-item">
+                        <span class="task-title">{{ task['title'] }}</span>
+                        <span class="status">{{ task['status'] }}</span>
+                    </li>
+                {% else %}
+                    <li id="emptyMessage" class="empty-message">
+                        No tasks yet. Add your first task!
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+
+</body>
+</html>

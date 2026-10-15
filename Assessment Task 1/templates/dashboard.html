@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}My Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="card dashboard-card">
+    <div class="profile-icon">&#128100;</div>
+
+    <h1>Welcome, {{ user["name"] }}!</h1>
+
+    <p class="subtitle">You have logged in successfully.</p>
+
+    <div class="details">
+        <div class="detail-row">
+            <span>User ID</span>
+            <strong>{{ user["id"] }}</strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Full Name</span>
+            <strong>{{ user["name"] }}</strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Email Address</span>
+            <strong>{{ user["email"] }}</strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Phone Number</span>
+            <strong>{{ user["phone"] }}</strong>
+        </div>
+    </div>
+
+    <a href="{{ url_for('logout') }}" class="btn logout-btn">
+        Logout
+    </a>
+</div>
+
+{% endblock %}
